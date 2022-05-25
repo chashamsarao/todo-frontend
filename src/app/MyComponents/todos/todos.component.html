@@ -1,0 +1,12 @@
+
+<app-add-todo class="formStyle" (todoAdd)="addTodo($event)"></app-add-todo>
+
+<h5>Your Todos</h5>
+
+<div *ngIf="this.todos.length===0; else elseBlock" >No Todos to display</div>
+<ng-template #elseBlock>
+    <div  class="mb-5" *ngFor = "let todo of todos; index as i">
+        <app-todo-item  [todo]="todo" [i]="i"  (todoDelete) = "deleteTodo($event)" (todoCheckbox) = "toggleTodo($event)">
+        </app-todo-item>   
+    </div>
+</ng-template>
