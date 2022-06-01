@@ -7,10 +7,18 @@ import { TodosComponent } from './MyComponents/todos/todos.component';
 import { TodoItemComponent } from './MyComponents/todo-item/todo-item.component';
 import { AddTodoComponent } from './MyComponents/add-todo/add-todo.component';
 import { FormsModule } from '@angular/forms';
-import { LoginSignUpComponent } from './MyComponents/login-sign-up/login-sign-up.component';
 
-import { HttpClientModule } from '@angular/common/http';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { UserComponent } from './MyComponents/user/user.component';
+import { SignInComponent } from './MyComponents/user/sign-in/sign-in.component';
+import { SignUpComponent } from './MyComponents/user/sign-up/sign-up.component';
+import { UserProfileComponent } from './MyComponents/user-profile/user-profile.component';
+import { UserService } from './shared/user.service';
+import { AuthGuard } from './MyComponents/auth/auth.guard';
+import { AuthInterceptor } from './MyComponents/auth/auth.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +26,11 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     TodosComponent,
     TodoItemComponent,
     AddTodoComponent,
-    LoginSignUpComponent
+    UserComponent,
+    SignInComponent,
+    SignUpComponent,
+    UserProfileComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -28,26 +40,12 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     OAuthModule.forRoot()
   ],
   
-//   providers: [
-//     {
-//       provide: 'SocialAuthServiceConfig',
-//       useValue: {
-//         autoLogin: false,
-//         providers: [
-//           {
-//             id: GoogleLoginProvider.PROVIDER_ID,
-//             provider: new GoogleLoginProvider(
-//               '1049173868079-ts3s68vka4h3abqjguj6uac43uud9vim.apps.googleusercontent.com'
-//             )
-//           }
-//         ],
-//         onError: (err) => {
-//           console.error(err);
-//         }
-//       } as SocialAuthServiceConfig,
-//     },
-
-//   ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+    ,AuthGuard, UserService],
    bootstrap: [AppComponent]
 })
 export class AppModule { }

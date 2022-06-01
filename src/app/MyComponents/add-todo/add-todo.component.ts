@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Todo } from 'src/app/Todo';
+import { AppServiceService } from 'src/app/app-service.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-todo',
@@ -9,19 +11,38 @@ import { Todo } from 'src/app/Todo';
 export class AddTodoComponent implements OnInit {
   
 
-  title: string;
-  desc: string;
+  todo : Todo;
+  
+
   @Output() todoAdd: EventEmitter<Todo> = new EventEmitter();
-  onSubmit(){
-    const todo = {
-      sno: 8,
-      title: this.title,
-      desc: this.desc,
-      active: true
-    }
-    this.todoAdd.emit(todo);
-    } 
+
+  constructor( private appService : AppServiceService ) { }
 
   ngOnInit(): void {
+      
   }
+  onSubmit(f : NgForm){
+
+      const todo = {
+
+      title : f.value['title'],
+      desc : f.value['desc'],
+      active : true
+  
+    
+      // title :  this.title,
+
+      // desc: this.desc,
+      // active: true
+      
+    }
+    
+    // this.appService.setter(todo)
+    // console.log(todo);
+    // this.todo = this.appService.getter()
+    
+
+    this.todoAdd.emit(todo);
+  } 
+  
 }

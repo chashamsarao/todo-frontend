@@ -1,11 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TodosComponent } from './MyComponents/todos/todos.component';
-import { LoginSignUpComponent } from './MyComponents/login-sign-up/login-sign-up.component'
+import { SignInComponent } from './MyComponents/user/sign-in/sign-in.component';
+import { UserComponent } from './MyComponents/user/user.component';
+import { SignUpComponent } from './MyComponents/user/sign-up/sign-up.component';
+import { UserProfileComponent } from './MyComponents/user-profile/user-profile.component';
+import { AuthGuard } from './MyComponents/auth/auth.guard';
+
 
 const routes: Routes = [
-  { path: 'login-sign-up', component: LoginSignUpComponent },
-  { path: 'todos', component: TodosComponent }];
+  { path: 'user', component: UserComponent},
+
+  { path: 'sign-in', component: SignInComponent},
+
+  { path: 'sign-up', component: SignUpComponent},
+  
+  { path: 'todos', component: TodosComponent, canActivate:[AuthGuard] },
+  { path: 'user-profile', component: UserProfileComponent, canActivate:[AuthGuard] }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

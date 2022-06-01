@@ -1,0 +1,24 @@
+<p>sign-in works!</p>
+
+<div class="login-form">
+  <h1>Login</h1>
+  <form #signInForm = "ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
+    <div class="form-group">
+      <label for="email">Email:<span class="required-indicator">*</span></label>
+      <input #email = "ngModel" name="email" type="email"  class="form-control" [pattern]="emailRegex" required ngModel>
+      <div *ngIf="signInForm.submitted && email.errors?.pattern">
+        <label>Invalid email address</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name">Password:<span class="required-indicator">*</span> </label>
+      <input #password = "ngModel" name="password" type="password" class="form-control" required minlength="4" ngModel>
+      <div *ngIf="signInForm.submitted && password.errors?.minlength">
+        <label>Password must be atleast 4 characters long</label>
+      </div>
+    </div>
+    <button class="confirm-btn" type="submit ">Login</button>
+  </form>
+  
+  
+</div>
