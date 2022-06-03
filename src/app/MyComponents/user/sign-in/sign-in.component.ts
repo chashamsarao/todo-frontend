@@ -43,4 +43,11 @@ export class SignInComponent implements OnInit {
 
   }
 
+  onClick() {
+    console.log("On click method triggered")
+    this.userService.loginWithGoogle().subscribe(
+      (res) => { console.log("Successfully hit") }
+    )
+  }
+
 }

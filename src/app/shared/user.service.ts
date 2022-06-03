@@ -22,20 +22,29 @@ export class UserService {
    }
 
    postUser(user: User) {
-     return this.http.post(this.ROOT_URL+'/register', user, this.noAuthHeader)
+            
+    return this.http.post(this.ROOT_URL+'/register', user, this.noAuthHeader)
+     
    }
    
    login(authCredentials) {
      return this.http.post(this.ROOT_URL+'/authenticate', authCredentials, this.noAuthHeader);
     
    }
+   
+//
+   loginWithGoogle() {
+     return this.http.get(this.ROOT_URL + '/login-with-google');
+   }
+//
 
    getUserProfile(){
      return this.http.get(this.ROOT_URL + '/userProfile');
    }
 
    setToken(token : string){
-     localStorage.setItem('token', token)
+     localStorage.setItem('token', token);
+     sessionStorage.setItem('token', token)
    }
 
    deleteToken() {
@@ -45,6 +54,13 @@ export class UserService {
    getToken() {
      return localStorage.getItem('token');
    }
+
+   //
+   getTokenSession() {
+     return sessionStorage.getItem('token')
+   }
+
+   //
 
   getUserPayload() {
       let token = this.getToken();

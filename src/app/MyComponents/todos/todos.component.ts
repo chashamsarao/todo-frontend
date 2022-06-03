@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from "../../Todo"
 import { AppServiceService } from 'src/app/app-service.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-todos',
@@ -15,7 +16,8 @@ export class TodosComponent implements OnInit {
   todosArray: Todo[];
   todoId : string;
   
-  constructor(private appService : AppServiceService, private route: ActivatedRoute,) {
+  
+  constructor(private appService : AppServiceService, private route: ActivatedRoute, private userService : UserService) {
     // this.localItem = localStorage.getItem("todos");
     // if(this.localItem == null){
 
@@ -85,6 +87,22 @@ showTodos() {
     // this.todo.desc = response["desc"],
     // this.todo.active = response["active"]
    });
+}
+
+show_userTodo() {
+  console.log("Triggered")
+  let token = this.userService.getTokenSession()
+  if(token) {
+    let userPayload = atob(token.split('.')[1]);
+    let payLoad = JSON.parse(userPayload);
+    this.appService.get_userTodo(payLoad).subscribe((res) => {
+      console.log(res)
+    })
+
+  }
+  else 
+    return null;
+
 }
 
 }

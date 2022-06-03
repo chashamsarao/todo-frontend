@@ -38,6 +38,10 @@ export class AppServiceService {
     return this.todo;
   }
 
+  get_userTodo(userPayload : Object) {
+    return this.http.post('http://localhost:3000/user'+"/todosGet", userPayload)
+  }
+
 }
 
 
