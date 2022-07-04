@@ -3,7 +3,7 @@
 
     <h3 [ngClass]="{'strike': !todo.active}">{{todo.title}}</h3>
     <p [ngClass]="{'strike': !todo.active}"> {{todo.desc}}</p>
-    <p [ngClass]="{'strike': !todo.active}"> {{todo._id}}</p>
+    <!-- <p [ngClass]="{'strike': !todo.active}"> {{todo._id}}</p> -->
     <div class="form-check">
         <input type="checkbox" class="form-check-input" id="todo{{i}}" (click)="onCheckboxClick(todo)" [checked] = "!todo.active">
         <label class="form-check-label" for="todo{{i}}">Done</label>

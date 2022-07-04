@@ -7,7 +7,8 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-userDetails: any; 
+userDetails: JSON; 
+
 
   constructor(private userService: UserService, private router: Router) { }
 

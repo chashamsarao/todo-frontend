@@ -37,10 +37,7 @@ export class TodosComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      console.log();
-      
-    });
+    this.showTodos();
   }
 
   deleteTodo (todo: Todo){
@@ -78,7 +75,7 @@ toggleTodo(todo: Todo){
 }
 
 showTodos() {
-  this.appService.get('todos').subscribe(response => {
+  this.appService.get('todosGet').subscribe(response => {
     console.log(typeof response);
 
     this.todosArray = response["msg"]

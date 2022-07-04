@@ -19,7 +19,10 @@
     </div>
     <button class="confirm-btn" type="submit ">Login</button>
   </form>
-  <button (click)="(onClick())">Login with Google</button>
+  <button (click)="(ssoLogin())">SSO Login</button>
+  <!-- <button (click)="(ssoLogout())">SSO Logout</button> -->
+  <div *ngIf="claim">HELLO {{claim}}. You are logged in!</div>
+  <!-- <button (click)="setToken()">Set Token</button> -->
   
   
 </div>

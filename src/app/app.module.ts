@@ -18,6 +18,9 @@ import { UserProfileComponent } from './MyComponents/user-profile/user-profile.c
 import { UserService } from './shared/user.service';
 import { AuthGuard } from './MyComponents/auth/auth.guard';
 import { AuthInterceptor } from './MyComponents/auth/auth.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 
 
 @NgModule({
@@ -37,7 +40,13 @@ import { AuthInterceptor } from './MyComponents/auth/auth.interceptor';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    OAuthModule.forRoot()
+    OAuthModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   
   providers: [{

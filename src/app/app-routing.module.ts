@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent},
   
   { path: 'todos', component: TodosComponent, canActivate:[AuthGuard] },
-  { path: 'user-profile', component: UserProfileComponent, canActivate:[AuthGuard] }];
+  { path: 'user-profile', component: UserProfileComponent, canActivate:[AuthGuard] },
+  { path: '**', redirectTo:'app-root'}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

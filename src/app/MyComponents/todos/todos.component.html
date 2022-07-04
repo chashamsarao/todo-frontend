@@ -4,7 +4,7 @@
 <h5>Your Todos</h5>
 
 <div>
-    <button (click) = "showTodos()">Show Todos</button>
+    <!-- <button (click) = "showTodos()">Show Todos</button> -->
     <div *ngIf="this.todosArray.length===0; else elseBlock" >No Todos to display</div>
     <ng-template #elseBlock>
         <div  class="mb-5" *ngFor = "let todo of todosArray; index as i">
@@ -14,6 +14,3 @@
     </ng-template>
 </div>
 
-<div>
-    <button (click)="show_userTodo()">Testing</button>
-</div>

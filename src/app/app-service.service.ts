@@ -13,9 +13,10 @@ export class AppServiceService {
   readonly ROOT_URL;
   todo : Todo;
   _id : string;
+  noAuthHeader ={ headers: new HttpHeaders({ 'NoAuth' : 'True'})};
 
   constructor(private http : HttpClient) {
-    this.ROOT_URL = 'http://localhost:3000';
+    this.ROOT_URL = 'http://localhost:3000/user';
    }
 
    get(uri: string) {
