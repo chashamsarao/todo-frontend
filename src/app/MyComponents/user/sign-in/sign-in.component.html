@@ -1,28 +1,44 @@
-<p>sign-in works!</p>
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid"
+          alt="Phone image">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        
+        <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
+          <div class="form-outline mb-4">
+            <label for="email">Email:<span class="required-indicator">*</span></label>
+            <input #email="ngModel" name="email" type="email" class="form-control form-control-lg"  [pattern]="emailRegex" required
+              ngModel />
+            <div *ngIf="signInForm.submitted && email.errors?.pattern">
+              <label>Invalid email address</label>
+            </div>
+          </div>
+          <div class="form-outline mb-4">
+            <label for="name">Password:<span class="required-indicator">*</span>
+            </label>
+            <input #password="ngModel" name="password" type="password" class="form-control form-control-lg"  required minlength="4"
+              ngModel />
+            <div *ngIf="signInForm.submitted && password.errors?.minlength">
+              <label>Password must be atleast 4 characters long</label>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit ">Login</button>
 
-<div class="login-form">
-  <h1>Login</h1>
-  <form #signInForm = "ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
-    <div class="form-group">
-      <label for="email">Email:<span class="required-indicator">*</span></label>
-      <input #email = "ngModel" name="email" type="email"  class="form-control" [pattern]="emailRegex" required ngModel>
-      <div *ngIf="signInForm.submitted && email.errors?.pattern">
-        <label>Invalid email address</label>
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+          </div>
+
+          <button (click)="ssoLogin()" class="btn btn-primary btn-lg btn-block">SSO Login</button>
+
+          <div *ngIf="claim">HELLO {{ claim }}. You are logged in!</div>
+
+        </form>
+        
+
       </div>
     </div>
-    <div class="form-group">
-      <label for="name">Password:<span class="required-indicator">*</span> </label>
-      <input #password = "ngModel" name="password" type="password" class="form-control" required minlength="4" ngModel>
-      <div *ngIf="signInForm.submitted && password.errors?.minlength">
-        <label>Password must be atleast 4 characters long</label>
-      </div>
-    </div>
-    <button class="confirm-btn" type="submit ">Login</button>
-  </form>
-  <button (click)="(ssoLogin())">SSO Login</button>
-  <!-- <button (click)="(ssoLogout())">SSO Logout</button> -->
-  <div *ngIf="claim">HELLO {{claim}}. You are logged in!</div>
-  <!-- <button (click)="setToken()">Set Token</button> -->
-  
-  
-</div>
+  </div>
+</section>
